@@ -1,21 +1,104 @@
-L’objectif est de choisir un projet d’implémentation de votre choix (petite application, petit jeu, …) a faire en groupe (2, ou 3). Ce projet doit être:
+# DEFLECT
 
-- **Petit, mais non trivial**. Ce ne doit pas être quelque chose de faisable en une poignée de prompts (vous avez 2 semaines pour le faire). L’idée est d’avoir un retour d’expérience avec un projet qui commence à passer à l’échelle. Disons au moins une vingtaine de fichiers de code et une cinquantaine de commits (ça peut paraître gros! mais vous allez voir, ça passe très vite).
-- **Visible sur Git**. Pour pouvoir jeter un oeil sur le code et le développement, le code doit être visible (pour moi, vous pouvez le garder privé), ainsi que des informations basiques de développement. Pour ce faire, j’ai crée un “hook” (comme présenté en classe par Tristan!)  qui devrait se charger automatiquement sur Vibe (testé avec 3.1.2). Le hook ne fait qu’enregistrer des informations. On pourra s’en servir pour analyser des données de développement. Vous devez commencer par forker le repo template: https://github.com/rrobbes/mini-project-template/ , quand vous lancez l’agent dans le repo 
-- **Utilisable par un agent**. Un petit côté experimental: votre application doit être au moins partiellement (c’est pas forcément évident pour toutes les scénarios) utilisable par un agent. Ça peut être soit par une interface en ligne de commande (en parallèle à une interface web/graphique), soit par un serveur MCP. Si vous avez des difficultés à imaginer quoi faire dans votre cas, envoyez-moi un mail et on en parle. Si vous voulez, vous pouvez même faire un “skill” (comme présenté en classe par Paul!) afin d’enseigner à votre agent comment utiliser l’application.
-- **Utilisez Vibe**. Certains d’entre vous utilisent Claude, Codex, … le hook ne marchera pas avec ces agents.
+Mini-projet de jeu d'arcade 2D contrôlé à la main via une webcam.
 
-Dans le cas ou vous avez déjà commencé dans la demi-heure, je pense que ça ne vous prendra pas trop de temps de “recommencer” avec le template du repo.  
+## Concept
 
-Timeline:
-- D’ici **mercredi 18** maximum: 
-	- un membre du groupe doit forker le projet (clicker sur un bouton): https://github.com/rrobbes/mini-project-template/ 
-	- inviter votre binôme.
-	- m’inviter en tant que membre du projet (rrobbes sur GitHub). 
-	- lancer Vibe une fois dans le repo, “truster” la configuration, et vérifier que des événements s’enregistrent dans le dossier events. 
-- D'ici **vendredi 20**: 
-	- faire au moins un premier commit d’un README.md avec un plan initial du projet. 
-	- m’envoyer un mail si vous avez des difficultés à envisager comment faire que votre application soit utilisable par un agent.
-- Jusqu’a **lundi 30**:
-  - travail sur le mini-projet.
-  - ajouter un fichier "report.md" ou vous faîtes une (brève) réflexion sur votre processus de travail, les facilités, les difficultés.
+Un noyau se trouve au centre de l'écran. Des projectiles arrivent de plus en
+plus vite depuis les bords vers ce noyau. Le joueur contrôle une raquette
+virtuelle (un arc autour du noyau) en déplaçant sa main devant la webcam, et
+doit renvoyer les projectiles avant qu'ils touchent le noyau.
+
+Objectif : survivre le plus longtemps possible et marquer le meilleur score.
+
+## Fonctionnalités prévues
+
+- Projectile renvoyé = 1 point ; noyau touché = fin de partie.
+- Difficulté croissante : vitesse et fréquence des projectiles augmentent
+  avec le temps.
+- Position de la raquette contrôlée par la position de la main devant la
+  webcam.
+- Score et meilleure distance affichés en fin de partie.
+
+## Technologies envisagées
+
+- **TypeScript** : langage principal du jeu et de la CLI.
+- **Phaser** : rendu 2D et boucle de jeu (canvas).
+- **MediaPipe (Hands)** : détection de la main à partir du flux webcam,
+  côté navigateur.
+
+Ce sont des choix de départ. MediaPipe en particulier est le point le moins
+sûr : si le suivi de la main pose problème, on basculera sur une solution
+plus simple (contrôle souris ou clavier), en gardant le même moteur.
+
+## Architecture
+
+On veut séparer le moteur du jeu de son interface :
+
+- **Moteur (`engine`)** : logique pure du jeu, sans rendu ni entrée. État
+  (position du noyau, de la raquette, des projectiles, score), simulation
+  pas à pas, collisions. Le moteur est déterministe : la même suite de
+  commandes donne toujours la même partie.
+- **Affichage (`ui`)** : rendu Phaser, lit l'état du moteur et l'affiche.
+- **Contrôles** : deux modules interchangeables qui envoient des commandes
+  au moteur :
+  - **webcam** : MediaPipe traduit la position de la main en position de
+    raquette (pour un humain) ;
+  - **CLI** : un agent (ou un humain) interagit avec le même moteur en
+  ligne de commande.
+
+Schéma :
+
+```
+             ┌────────────┐
+ webcam ────►│  controls  ├──┐
+ (MediaPipe) └────────────┘  │    ┌────────┐    ┌─────────┐
+                            ├───►│ moteur │───►│ rendu   │
+ CLI (agent) ────────────────┘    └────────┘    │ (Phaser)│
+                                               └─────────┘
+```
+
+## Jouer sans webcam : mode agent
+
+Le professeur demande que l'application soit utilisable par un agent. Le
+moteur étant indépendant du rendu, on prévoit une CLI minimale qui permet de :
+
+- récupérer l'état du jeu (positions, score, projectiles en vol) ;
+- déplacer la raquette (position absolue sur l'arc) ;
+- avancer la simulation d'un nombre de pas donné.
+
+L'agent joue donc en boucle : lire l'état, décider d'un déplacement, avancer.
+Aucune webcam ni fenêtre graphique n'est nécessaire. Si le temps le permet,
+on ajoutera un petit skill Vibe pour expliquer à l'agent comment utiliser
+cette CLI.
+
+## Plan de développement (jusqu'au 30 novembre)
+
+- **Étape 1 — moteur minimal** : état du jeu, projectiles, collisions,
+  score, partie jouable au clavier/souris pour tester.
+- **Étape 2 — rendu Phaser** : affichage du moteur à l'écran, boucle de jeu
+  liée à la simulation.
+- **Étape 3 — CLI agent** : commandes état / déplacement / pas de
+  simulation, réutilisant le moteur tel quel.
+- **Étape 4 — contrôle webcam** : intégration MediaPipe, calibrage de la
+  position de la main vers la raquette.
+- **Étape 5 — finition** : score persistant (meilleure partie), équilibrage
+  de la difficulté, `report.md` avec le retour d'expérience.
+
+Priorités : le moteur et la CLI d'abord (cœur du projet et demande du
+professeur), la webcam ensuite (risque le plus élevé, mais pas bloquante
+pour le reste).
+
+## Difficultés anticipées
+
+- **Suivi de la main** : fluidité et fiabilité de MediaPipe selon
+  l'éclairage et la webcam. C'est la partie la plus incertaine, d'où un
+  fallback souris/clavier.
+- **Latence** : chaîne webcam → MediaPipe → moteur → rendu ; il faut que
+  le mouvement reste jouable.
+- **Découpage moteur / affichage** : garder le moteur vraiment pur
+  (sans dépendance à Phaser) demande de la discipline dès le début.
+- **Simulation pas à pas pour l'agent** : il faut garantir que le moteur
+  tourne de manière identique avec et sans interface graphique.
+- **Cadence de travail à deux** sur un petit repo : se répartir moteur,
+  rendu et webcam sans se marcher dessus.
