@@ -1,0 +1,15 @@
+{
+  "seq": 77,
+  "received_at": "2026-11-24T12:47:15.168715+00:00",
+  "hook_event_name": "pre_agent",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_agent",
+    "agent_name": "default",
+    "turn_id": "turn-a2488276b8ca0c07bcdc8a4baa234dc8",
+    "prompt": "c quoi le contenu des fichiers JSON dans events/1c3bcf93-6e46-e7d3-417b-10963932d4fe/"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "seq": 95,
+  "received_at": "2026-11-24T12:48:29.221025+00:00",
+  "hook_event_name": "post_agent",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_agent",
+    "agent_name": "default",
+    "turn_id": "turn-6119e0ec5172c61ff9e0dd31f73800fb",
+    "response_text": [
+      "Non — c'est explicitement interdit par le `AGENTS.md` du projet :",
+      "",
+      "> *\"Do not delete the `events/` directory, and never add `events/` to `.gitignore` — it is the hook's log output and is meant to be committed to git like any other file. The events data will be used for data analysis, which is why it is important to keep.\"*",
+      "",
+      "Donc `events/` reste **volontairement commité** dans git (comme on l'a fait dans le commit `acda6bf`), et le `.gitignore` ne doit contenir que `.DS_Store`, `node_modules/` et `dist/`."
+    ]
+  }
+}

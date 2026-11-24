@@ -1,0 +1,37 @@
+{
+  "seq": 91,
+  "received_at": "2026-11-24T12:47:40.598195+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "uSUEz9lQ0",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && for f in *.json; do python3 -c \"import json; d=json.load(open('$f')); print(d['hook_event_name'])\" 2>/dev/null; done | sort | uniq -c | sort -rn"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && for f in *.json; do python3 -c \"import json; d=json.load(open('$f')); print(d['hook_event_name'])\" 2>/dev/null; done | sort | uniq -c | sort -rn",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "     35 pre_tool",
+        "     34 post_tool",
+        "     13 notification",
+        "      4 pre_agent",
+        "      3 post_agent",
+        "      1 session_start",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 3083
+  }
+}

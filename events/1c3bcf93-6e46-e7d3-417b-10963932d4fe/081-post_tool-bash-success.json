@@ -1,0 +1,41 @@
+{
+  "seq": 81,
+  "received_at": "2026-11-24T12:47:18.345520+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "oIdYaWpyM",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && ls | head -8 && echo \"...\" && ls | wc -l"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && ls | head -8 && echo \"...\" && ls | wc -l",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "001-start-startup.json",
+        "002-pre_agent-en_se_basant_sur_le_readme_de.json",
+        "003-pre_tool-read_file.json",
+        "004-pre_tool-bash.json",
+        "005-post_tool-read_file-success.json",
+        "006-post_tool-bash-success.json",
+        "007-post_agent.json",
+        "008-notify-turn_completed.json",
+        "...",
+        "80",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 74
+  }
+}

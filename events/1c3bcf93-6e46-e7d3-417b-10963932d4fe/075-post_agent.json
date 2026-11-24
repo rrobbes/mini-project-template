@@ -1,0 +1,15 @@
+{
+  "seq": 75,
+  "received_at": "2026-11-24T12:44:59.246476+00:00",
+  "hook_event_name": "post_agent",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_agent",
+    "agent_name": "default",
+    "turn_id": "turn-55d2afa21e47598c2be510e8c4000b2d",
+    "response_text": "Compris, noté. Je ne committerai plus jamais sans que tu me le demandes explicitement — les prochains changements resteront en working tree tant que tu ne me dis pas de committer."
+  }
+}
