@@ -1,0 +1,28 @@
+{
+  "seq": 34,
+  "received_at": "2026-11-24T12:40:52.972904+00:00",
+  "hook_event_name": "pre_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_tool",
+    "tool_name": "file_system.write_file",
+    "tool_call_id": "joNH4qcE4",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/src/ui/game.ts",
+      "content": [
+        "// Placeholder UI — le vrai rendu Phaser viendra à l'étape 2.",
+        "// Ici on affiche juste l'état en console pour valider la boucle moteur.",
+        "import { GameState } from '../engine';",
+        "",
+        "export function render(state: GameState): void {",
+        "  const status = state.gameOver ? 'GAME OVER' : `score=${state.score} t=${state.elapsed.toFixed(1)}s projectiles=${state.projectiles.length}`;",
+        "  console.log(`[ui] paddle=${(state.paddle.angle * 180 / Math.PI).toFixed(0)}° ${status}`);",
+        "}",
+        ""
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "seq": 18,
+  "received_at": "2026-11-24T12:39:45.907031+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.write_file",
+    "tool_call_id": "9FX4L76L4",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/package.json",
+      "content": [
+        "{",
+        "  \"name\": \"deflect\",",
+        "  \"version\": \"0.1.0\",",
+        "  \"description\": \"Jeu d'arcade 2D - défendre un noyau avec une raquette contrôlée à la main\",",
+        "  \"type\": \"module\",",
+        "  \"scripts\": {",
+        "    \"build\": \"tsc\",",
+        "    \"cli\": \"tsx cli/deflect-cli.ts\",",
+        "    \"dev\": \"tsx src/main.ts\",",
+        "    \"test\": \"vitest run\"",
+        "  },",
+        "  \"devDependencies\": {",
+        "    \"tsx\": \"^4.19.0\",",
+        "    \"typescript\": \"^5.6.0\",",
+        "    \"vitest\": \"^2.1.0\"",
+        "  }",
+        "}",
+        ""
+      ]
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "bytes_written": 397,
+      "file_existed": false,
+      "path": "/home/amine/Projet_Agentic/mini-project-template/package.json"
+    },
+    "tool_error": null,
+    "duration_ms": 41
+  }
+}

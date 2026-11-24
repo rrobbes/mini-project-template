@@ -1,0 +1,35 @@
+{
+  "seq": 40,
+  "received_at": "2026-11-24T12:40:53.199178+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.write_file",
+    "tool_call_id": "Z8rK1ALvO",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/src/controls/keyboard.ts",
+      "content": [
+        "// Placeholder contrôles clavier/souris — sera remplacé/complété par la webcam.",
+        "// Ici : la raquette tourne lentement en rond pour tester le moteur.",
+        "import { Command } from '../engine';",
+        "",
+        "export function keyboardControl(elapsed: number): Command {",
+        "  return { paddleAngle: elapsed * 2 }; // rotation douce pour le test",
+        "}",
+        ""
+      ]
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "bytes_written": 325,
+      "file_existed": false,
+      "path": "/home/amine/Projet_Agentic/mini-project-template/src/controls/keyboard.ts"
+    },
+    "tool_error": null,
+    "duration_ms": 103
+  }
+}

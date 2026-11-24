@@ -1,0 +1,16 @@
+{
+  "seq": 60,
+  "received_at": "2026-11-24T12:41:40.032675+00:00",
+  "hook_event_name": "notification",
+  "event": {
+    "hook_event_name": "notification",
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "notification_type": "approval_requested",
+    "message": "Vibe needs your approval to run file_system.bash",
+    "agent_name": "default",
+    "tool_name": "file_system.bash"
+  }
+}

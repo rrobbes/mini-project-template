@@ -1,0 +1,40 @@
+{
+  "seq": 6,
+  "received_at": "2026-11-24T12:24:05.570399+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "ip075plxq",
+    "tool_input": {
+      "timeout": 120,
+      "command": "ls -la /home/amine/Projet_Agentic/mini-project-template/"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "ls -la /home/amine/Projet_Agentic/mini-project-template/",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "total 36",
+        "drwxrwxr-x 5 amine amine 4096 Nov 24 13:22 .",
+        "drwxrwxr-x 3 amine amine 4096 Nov 24 13:19 ..",
+        "drwxrwxr-x 8 amine amine 4096 Nov 24 13:19 .git",
+        "-rw-rw-r-- 1 amine amine   10 Nov 24 13:19 .gitignore",
+        "drwxrwxr-x 3 amine amine 4096 Nov 24 13:19 .vibe",
+        "-rw-rw-r-- 1 amine amine 1152 Nov 24 13:19 AGENTS.md",
+        "-rw-rw-r-- 1 amine amine 4651 Nov 24 13:19 README.md",
+        "drwxrwxr-x 3 amine amine 4096 Nov 24 13:22 events",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 43
+  }
+}

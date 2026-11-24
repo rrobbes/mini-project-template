@@ -1,0 +1,44 @@
+{
+  "seq": 55,
+  "received_at": "2026-11-24T12:41:28.860347+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "Hurgnepsf",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsx src/main.ts 2>&1"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsx src/main.ts 2>&1",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "[ui] paddle=0° score=0 t=0.0s projectiles=1",
+        "[ui] paddle=57° score=0 t=0.5s projectiles=1",
+        "[ui] paddle=115° score=0 t=1.0s projectiles=1",
+        "[ui] paddle=172° score=0 t=1.5s projectiles=2",
+        "[ui] paddle=229° score=0 t=2.0s projectiles=2",
+        "[ui] paddle=286° score=0 t=2.5s projectiles=3",
+        "[ui] paddle=344° score=0 t=3.0s projectiles=3",
+        "[ui] paddle=401° score=0 t=3.5s projectiles=4",
+        "[ui] paddle=458° score=0 t=4.0s projectiles=4",
+        "[ui] paddle=516° score=0 t=4.5s projectiles=5",
+        "[ui] paddle=573° score=0 t=5.0s projectiles=5",
+        "[ui] paddle=583° GAME OVER",
+        "Partie terminée : score=0",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 386
+  }
+}

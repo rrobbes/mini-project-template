@@ -1,0 +1,33 @@
+{
+  "seq": 52,
+  "received_at": "2026-11-24T12:41:25.732427+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "mrlCbrdkU",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npm install --save-dev @types/node 2>&1 | tail -2 && npx tsc --noEmit 2>&1"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npm install --save-dev @types/node 2>&1 | tail -2 && npx tsc --noEmit 2>&1",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "npm warn install-scripts",
+        "npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 3120
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "seq": 15,
+  "received_at": "2026-11-24T12:39:27.893661+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "a8yn6MLnU",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && git checkout -b feat/architecture-base"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && git checkout -b feat/architecture-base",
+      "returncode": 0,
+      "stderr": [
+        "Switched to a new branch 'feat/architecture-base'",
+        ""
+      ],
+      "stdout": "",
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 2934
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "seq": 36,
+  "received_at": "2026-11-24T12:40:52.985311+00:00",
+  "hook_event_name": "pre_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_tool",
+    "tool_name": "file_system.write_file",
+    "tool_call_id": "GwCZZy4qW",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/src/controls/cli.ts",
+      "content": [
+        "// Contrôleur CLI : lit les commandes depuis une interface agent.",
+        "// Implémentation complète à l'étape 3 — ici juste la signature.",
+        "import { Command } from '../engine';",
+        "",
+        "export interface CliSession {",
+        "  state: import('../engine').GameState;",
+        "}",
+        "",
+        "export function readState(session: CliSession) {",
+        "  return session.state;",
+        "}",
+        "",
+        "export function applyCommand(session: CliSession, cmd: Command): void {",
+        "  // Sera câblé dans la CLI de l'étape 3.",
+        "  void cmd;",
+        "}",
+        ""
+      ]
+    }
+  }
+}
