@@ -1,8 +1,15 @@
-// Placeholder UI — le vrai rendu Phaser viendra à l'étape 2.
-// Ici on affiche juste l'état en console pour valider la boucle moteur.
-import { GameState } from '../engine';
+// UI Phaser — scène vide, première tranche de l'étape 2.
+// Les tranches suivantes créeront ici les sprites du noyau, de la raquette
+// et des projectiles en lisant l'état du moteur (import de src/engine),
+// sans jamais écrire dans le moteur depuis l'UI.
+import Phaser from 'phaser';
 
-export function render(state: GameState): void {
-  const status = state.gameOver ? 'GAME OVER' : `score=${state.score} t=${state.elapsed.toFixed(1)}s projectiles=${state.projectiles.length}`;
-  console.log(`[ui] paddle=${(state.paddle.angle * 180 / Math.PI).toFixed(0)}° ${status}`);
+export class DeflectScene extends Phaser.Scene {
+  constructor() {
+    super('deflect');
+  }
+
+  create(): void {
+    // Scène vide volontaire : la boucle moteur → rendu arrive ensuite.
+  }
 }

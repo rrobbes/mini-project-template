@@ -1,21 +1,15 @@
-// Point d'entrée minimal : boucle moteur + rendu console + contrôle clavier.
-// Remplacé par Phaser à l'étape 2.
-import { createInitialState, step } from './engine';
-import { render } from './ui/game';
-import { keyboardControl } from './controls/keyboard';
+// Point d'entrée navigateur — étape 2 : démarre la scène Phaser.
+// Le moteur reste pur (aucune dépendance au rendu) : l'UI lira son état
+// dans les tranches suivantes de l'étape 2, via src/ui/game.ts.
+import Phaser from 'phaser';
+import { DeflectScene } from './ui/game';
+import { WORLD_SIZE } from './engine';
 
-const DT = 1 / 60;
-
-function main() {
-  const state = createInitialState(42);
-  let steps = 0;
-  while (!state.gameOver && steps < 60 * 30) { // max 30s pour le test
-    step(state, keyboardControl(state.elapsed), DT);
-    if (steps % 30 === 0) render(state);
-    steps++;
-  }
-  render(state);
-  console.log(`Partie terminée : score=${state.score}`);
-}
-
-main();
+new Phaser.Game({
+  type: Phaser.AUTO,
+  parent: 'game',
+  width: WORLD_SIZE,
+  height: WORLD_SIZE,
+  backgroundColor: '#111827',
+  scene: [DeflectScene],
+});
