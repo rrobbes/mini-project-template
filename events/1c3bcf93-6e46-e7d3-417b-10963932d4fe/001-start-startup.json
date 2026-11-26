@@ -1,0 +1,15 @@
+{
+  "seq": 1,
+  "received_at": "2026-11-24T12:22:12.659402+00:00",
+  "hook_event_name": "session_start",
+  "event": {
+    "hook_event_name": "session_start",
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "source": "startup",
+    "agent_name": "default",
+    "model": "mistral-large-4-0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "seq": 82,
+  "received_at": "2026-11-24T12:47:18.365486+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.read_file",
+    "tool_call_id": "ZYGG0755g",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe/001-start-startup.json"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "content": [
+        "{",
+        "  \"seq\": 1,",
+        "  \"received_at\": \"2026-11-24T12:22:12.659402+00:00\",",
+        "  \"hook_event_name\": \"session_start\",",
+        "  \"event\": {",
+        "    \"hook_event_name\": \"session_start\",",
+        "    \"session_id\": \"1c3bcf93-6e46-e7d3-417b-10963932d4fe\",",
+        "    \"transcript_path\": \"/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe\",",
+        "    \"cwd\": \"/home/amine/Projet_Agentic/mini-project-template\",",
+        "    \"parent_session_id\": null,",
+        "    \"source\": \"startup\",",
+        "    \"agent_name\": \"default\",",
+        "    \"model\": \"mistral-large-4-0\"",
+        "  }",
+        "}",
+        ""
+      ],
+      "file_size_bytes": 505,
+      "lines_read": 15,
+      "next_offset": null,
+      "offset": 0,
+      "path": "/home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe/001-start-startup.json",
+      "returned_bytes": 505,
+      "total_lines": 15,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 69
+  }
+}

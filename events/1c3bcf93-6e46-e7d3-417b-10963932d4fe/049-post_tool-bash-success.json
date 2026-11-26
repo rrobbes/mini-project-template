@@ -1,0 +1,33 @@
+{
+  "seq": 49,
+  "received_at": "2026-11-24T12:41:21.415832+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "JAw9J68Bp",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsc --noEmit 2>&1"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsc --noEmit 2>&1",
+      "returncode": 2,
+      "stderr": "",
+      "stdout": [
+        "cli/deflect-cli.ts(8,14): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+        "cli/deflect-cli.ts(33,5): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 5680
+  }
+}

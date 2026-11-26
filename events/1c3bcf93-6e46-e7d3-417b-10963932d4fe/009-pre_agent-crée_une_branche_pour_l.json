@@ -1,0 +1,15 @@
+{
+  "seq": 9,
+  "received_at": "2026-11-24T12:26:08.074542+00:00",
+  "hook_event_name": "pre_agent",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_agent",
+    "agent_name": "default",
+    "turn_id": "turn-fb202b100f977568479f8e84d9ba465c",
+    "prompt": "crée une branche, pour l'architecture, bascules dedans, et implémente cette archi de base avec le code le plus minimal possible"
+  }
+}

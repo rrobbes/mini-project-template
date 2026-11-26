@@ -1,0 +1,36 @@
+{
+  "seq": 46,
+  "received_at": "2026-11-24T12:41:14.533719+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "f8yJxvVz3",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npm install 2>&1 | tail -5"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npm install 2>&1 | tail -5",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "npm warn install-scripts 2 packages have install scripts not yet covered by allowScripts:",
+        "npm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)",
+        "npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)",
+        "npm warn install-scripts",
+        "npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 18853
+  }
+}

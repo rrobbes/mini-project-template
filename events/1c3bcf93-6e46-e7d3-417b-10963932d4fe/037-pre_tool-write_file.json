@@ -1,0 +1,41 @@
+{
+  "seq": 37,
+  "received_at": "2026-11-24T12:40:52.992814+00:00",
+  "hook_event_name": "pre_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_tool",
+    "tool_name": "file_system.write_file",
+    "tool_call_id": "c8w2rhR9j",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/src/main.ts",
+      "content": [
+        "// Point d'entrée minimal : boucle moteur + rendu console + contrôle clavier.",
+        "// Remplacé par Phaser à l'étape 2.",
+        "import { createInitialState, step } from './engine';",
+        "import { render } from './ui/game';",
+        "import { keyboardControl } from './controls/keyboard';",
+        "",
+        "const DT = 1 / 60;",
+        "",
+        "function main() {",
+        "  const state = createInitialState(42);",
+        "  let steps = 0;",
+        "  while (!state.gameOver && steps < 60 * 30) { // max 30s pour le test",
+        "    step(state, keyboardControl(state.elapsed), DT);",
+        "    if (steps % 30 === 0) render(state);",
+        "    steps++;",
+        "  }",
+        "  render(state);",
+        "  console.log(`Partie terminée : score=${state.score}`);",
+        "}",
+        "",
+        "main();",
+        ""
+      ]
+    }
+  }
+}

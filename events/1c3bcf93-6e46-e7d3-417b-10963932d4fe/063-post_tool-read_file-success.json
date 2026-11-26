@@ -1,0 +1,34 @@
+{
+  "seq": 63,
+  "received_at": "2026-11-24T12:41:48.617305+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.read_file",
+    "tool_call_id": "xhB1i2Y35",
+    "tool_input": {
+      "file_path": "/home/amine/Projet_Agentic/mini-project-template/.gitignore"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "content": [
+        ".DS_Store",
+        ""
+      ],
+      "file_size_bytes": 10,
+      "lines_read": 1,
+      "next_offset": null,
+      "offset": 0,
+      "path": "/home/amine/Projet_Agentic/mini-project-template/.gitignore",
+      "returned_bytes": 10,
+      "total_lines": 1,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 170
+  }
+}

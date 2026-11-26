@@ -1,0 +1,51 @@
+{
+  "seq": 86,
+  "received_at": "2026-11-24T12:47:29.090053+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "PNKf3BD4T",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && for f in *.json; do python3 -c \"import json; d=json.load(open('$f')); print(d['hook_event_name'], '|', '$f')\" 2>/dev/null; done | sort | uniq -c | sort -rn | head -20"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && for f in *.json; do python3 -c \"import json; d=json.load(open('$f')); print(d['hook_event_name'], '|', '$f')\" 2>/dev/null; done | sort | uniq -c | sort -rn | head -20",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "      1 session_start | 001-start-startup.json",
+        "      1 pre_tool | 084-pre_tool-bash.json",
+        "      1 pre_tool | 080-pre_tool-read_file.json",
+        "      1 pre_tool | 079-pre_tool-read_file.json",
+        "      1 pre_tool | 078-pre_tool-bash.json",
+        "      1 pre_tool | 069-pre_tool-bash.json",
+        "      1 pre_tool | 066-pre_tool-bash.json",
+        "      1 pre_tool | 064-pre_tool-edit.json",
+        "      1 pre_tool | 062-pre_tool-read_file.json",
+        "      1 pre_tool | 059-pre_tool-bash.json",
+        "      1 pre_tool | 057-pre_tool-edit.json",
+        "      1 pre_tool | 054-pre_tool-bash.json",
+        "      1 pre_tool | 053-pre_tool-bash.json",
+        "      1 pre_tool | 050-pre_tool-bash.json",
+        "      1 pre_tool | 047-pre_tool-bash.json",
+        "      1 pre_tool | 044-pre_tool-bash.json",
+        "      1 pre_tool | 038-pre_tool-write_file.json",
+        "      1 pre_tool | 037-pre_tool-write_file.json",
+        "      1 pre_tool | 036-pre_tool-write_file.json",
+        "      1 pre_tool | 035-pre_tool-write_file.json",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 5706
+  }
+}

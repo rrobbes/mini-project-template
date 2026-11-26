@@ -1,0 +1,18 @@
+{
+  "seq": 84,
+  "received_at": "2026-11-24T12:47:23.328107+00:00",
+  "hook_event_name": "pre_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "pre_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "PNKf3BD4T",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template/events/1c3bcf93-6e46-e7d3-417b-10963932d4fe && for f in *.json; do python3 -c \"import json; d=json.load(open('$f')); print(d['hook_event_name'], '|', '$f')\" 2>/dev/null; done | sort | uniq -c | sort -rn | head -20"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "seq": 56,
+  "received_at": "2026-11-24T12:41:29.424768+00:00",
+  "hook_event_name": "post_tool",
+  "event": {
+    "session_id": "1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "transcript_path": "/home/amine/.vibe/logs/session/unified/1c3bcf93-6e46-e7d3-417b-10963932d4fe",
+    "cwd": "/home/amine/Projet_Agentic/mini-project-template",
+    "parent_session_id": null,
+    "hook_event_name": "post_tool",
+    "tool_name": "file_system.bash",
+    "tool_call_id": "CXY8fzBVq",
+    "tool_input": {
+      "timeout": 120,
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsx cli/deflect-cli.ts state 2>&1 | head -20 && echo \"---\" && npx tsx cli/deflect-cli.ts move 1.5 2>&1 && echo \"---\" && npx tsx cli/deflect-cli.ts step 120 2>&1 | head -5"
+    },
+    "tool_status": "success",
+    "tool_output": {
+      "command": "cd /home/amine/Projet_Agentic/mini-project-template && npx tsx cli/deflect-cli.ts state 2>&1 | head -20 && echo \"---\" && npx tsx cli/deflect-cli.ts move 1.5 2>&1 && echo \"---\" && npx tsx cli/deflect-cli.ts step 120 2>&1 | head -5",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": [
+        "{",
+        "  \"worldSize\": 800,",
+        "  \"core\": {",
+        "    \"pos\": {",
+        "      \"x\": 400,",
+        "      \"y\": 400",
+        "    },",
+        "    \"radius\": 30",
+        "  },",
+        "  \"paddle\": {",
+        "    \"angle\": 0,",
+        "    \"arcLength\": 1.0471975511965976,",
+        "    \"distance\": 120",
+        "  },",
+        "  \"projectiles\": [],",
+        "  \"score\": 0,",
+        "  \"elapsed\": 0,",
+        "  \"gameOver\": false,",
+        "  \"nextId\": 1,",
+        "  \"seed\": 1",
+        "---",
+        "{\"paddle\":{\"angle\":0,\"arcLength\":1.0471975511965976,\"distance\":120}}",
+        "---",
+        "{",
+        "  \"worldSize\": 800,",
+        "  \"core\": {",
+        "    \"pos\": {",
+        "      \"x\": 400,",
+        ""
+      ],
+      "timed_out": false,
+      "was_truncated": false
+    },
+    "tool_error": null,
+    "duration_ms": 929
+  }
+}
