@@ -5,17 +5,22 @@ uniquement sur preuve (test, exécution, code présent dans le dépôt).
 
 ## Résumé
 
-- **Version actuelle** : `v0.1` en cours — première version **fonctionnelle** :
-  rendu complet (noyau, raquette, projectiles, HUD, écran de fin + restart) et
-  contrôle souris codés, testés au niveau moteur/build/serveur ; **validation
-  en jeu au navigateur à faire par le groupe**.
-- **Étape en cours** : étape 10 — validation v0.1 (parties humain + agent).
-  Les étapes 5-9 sont posées et validées en jeu au navigateur (retour du groupe).
+- **Version actuelle** : `v0.1` jouable (commits `3683a55`, `b8a7cd5`) **+ rework
+  visuel v0.2 « Neon Cyber / Cosmic Energy »** : direction artistique complète
+  (arène, noyau énergétique procédural, bouclier à traînée, projectiles
+  énergétiques, effets d'interception, sons, HUD, écrans), boucle de rendu
+  interpolée à pas fixe, FPS mesurés. Vérifié par navigateur automatisé
+  (`scripts/visual-check.mjs`, exit 0) ; **ressenti à valider en vrai
+  navigateur GPU par le groupe**.
+- **Étape en cours** : validation humaine du rework visuel v0.2 (navigateur
+  réel, GPU) puis commit. Les étapes 5-9 (v0.1) sont DONE.
 - **Prochaines actions prioritaires** :
-  1. Committer les étapes 5-9 (contrôle souris, rendu, HUD, fin/restart).
-  2. Étape 10 — validation v0.1 (partie humain + partie agent via CLI, même
+  1. Jouer au rework visuel dans un vrai navigateur (`npm run dev`), valider
+     fluidité et rendu, puis committer.
+  2. Étapes 12/13 de v0.2 : équilibrage de la difficulté, feedback visuel
+     supplémentaire si besoin.
+  3. Étape 10 : validation v0.1 (partie humain + partie agent via CLI, même
      simulation à seed/commandes égales).
-  3. Étape 11 — meilleur score persistant.
 - **Blocages** : aucun technique. Point logistique : le push SSH échoue depuis
   l'environnement de travail (push possible en HTTPS, vérifié).
 
@@ -30,7 +35,7 @@ uniquement sur preuve (test, exécution, code présent dans le dépôt).
 | Scène Phaser + serveur Vite | Fonctionnel (committé 3683a55) | `npm run dev` : Vite démarre, `/` et `/src/main.ts` servis (200). Rendu navigateur vérifié visuellement à faire par le groupe |
 | Contrôle souris | **Fonctionnel** | `src/controls/mouse.ts` + 9 tests ; modules servis par Vite (200) |
 | Contrôle clavier réel | **Absent** | `keyboard.ts` = rotation automatique, pas une entrée joueur |
-| Rendu du jeu (arène, projectiles, HUD) | **Fonctionnel** | Assets CC0 dans `public/assets/` (planet2 + asteroid1-3) ; build + service 200 |
+| Rendu du jeu (arène, projectiles, HUD) | **Fonctionnel** (v0.2-rework : rendu procédural « Neon Cyber ») | `scripts/visual-check.mjs` exit 0 : noyau, bouclier, projectiles, HUD et écrans vérifiés par lecture du framebuffer ; assets procéduraux, voir `ASSETS.md` |
 | Écran de fin / recommencer | **Fonctionnel** | Overlay + clic/Espace → `startGame()` |
 | Meilleur score persistant | **Absent** | Aucune trace de stockage |
 
@@ -62,7 +67,8 @@ Statut : `TODO` · `IN PROGRESS` · `DONE` · `BLOCKED`.
 **2. CLI agent à session persistante** — 🔴 — `DONE`
 - Objectif : boucle agent `state → move → step → reset` entre invocations.
 - Tâches : sérialisation JSON atomique, validation au chargement, angle cible
-  appliqué par le moteur (limité par `PADDLE_SPEED`).
+  appliqué par le moteur (aujourd'hui instantané — le plafond `PADDLE_SPEED`
+  a été retiré à la demande du groupe après le rework visuel).
 - Dépendances : étape 1.
 - Validation : 7 tests de session + boucle manuelle exécutée (angle 3 atteint,
   `elapsed` cumulé à travers les invocations).
@@ -98,8 +104,9 @@ Statut : `TODO` · `IN PROGRESS` · `DONE` · `BLOCKED`.
   sans le rendu de l'étape 6. `keyboard.ts` (rotation auto) reste hors chemin
   d'exécution — décision D5 toujours ouverte.
 - Validation : 9 tests (`src/controls/__tests__/mouse.test.ts`) : angles
-  cardinaux, indépendance à la distance, poursuite à `PADDLE_SPEED`, cible
-  atteinte sans dépassement, changement de cible en cours de route. `npm test`
+  cardinaux, indépendance à la distance, orientation instantanée (le plafond
+  `PADDLE_SPEED` a été retiré depuis — voir v0.2-rework), cible atteinte,
+  changement de cible en cours de route. `npm test`
   25/25, `npm run build` vert, modules servis par Vite (200).
 - Reste : fluidité vérifiée en jeu au navigateur par le groupe, puis passage à
   `DONE`.
@@ -155,6 +162,53 @@ Statut : `TODO` · `IN PROGRESS` · `DONE` · `BLOCKED`.
 - Dépendances : étapes 5-9.
 - Validation : les deux manières de jouer donnent la même simulation à seed
   et commandes égales.
+
+### v0.2-rework — Direction artistique « Neon Cyber / Cosmic Energy » (faite)
+
+Relecture complète du rendu et de la fluidité, selon la spécification du groupe.
+Toutes les briques sont vérifiées par `scripts/visual-check.mjs` (Firefox
+headless, lecture directe du framebuffer WebGL) : phases start → playing →
+gameover, 0 erreur console, souris suivie, arène/noyau/bouclier/projectiles
+rendus, FPS mesurés. Reste : ressenti en vrai navigateur GPU.
+
+- **R1. Diagnostic fluidité** — `DONE`. Causes trouvées : aucune
+  interpolation sim/rendu, accumulateur non borné, rotation par frame (pas
+  par seconde), setText à chaque frame, DPR ignoré.
+- **R2. Boucle de rendu** — `DONE`. Pas fixe 1/60 s + accumulateur borné
+  (max 5 pas/frame) + **interpolation** de l'angle raquette et des positions
+  projectiles entre deux pas ; angle moteur continu (jamais normalisé) →
+  aucune discontinuité ±π. HUD mis à jour seulement au changement de valeur.
+- **R3. Arène** — `DONE`. Fond dégradé radial discret, champ d'étoiles avec
+  parallaxe lente, grille peu opaque, anneaux concentriques (textures
+  pré-calculées). Palette `src/ui/palette.ts` (#050811, #14283E, #22DFFF,
+  #FF436D, #61FFD2, #E6F8FF, #81A6BB). Scène responsive (Scale.FIT).
+- **R4. Noyau** — `DONE`. Sphère énergétique 100 % procédurale : halo
+  cyan, centre blanc, pulsation douce, deux anneaux en rotation opposée,
+  4 particules orbitales, effondrement animé au game over.
+- **R5. Raquette** — `DONE`. Bouclier 4 couches de glow + centre lumineux +
+  extrémités arrondies ; traînée proportionnelle à la vitesse angulaire ;
+  flash à l'interception ; géométrie = zone de collision réelle.
+- **R6. Projectiles** — `DONE`. Orbes énergétiques : centre blanc + halo,
+  rouge #FF436D en menace, turquoise #61FFD2 après renvoi (détection
+  purement visuelle par signe de vitesse radiale), traînées orientées.
+- **R7. Effets d'interception** — `DONE`. Onde de choc, émission de
+  particules, +1 flottant, pulsation du score, son de rebond synthétisé
+  (WebAudio). Game over : explosion, screen shake, transition animée.
+- **R8. HUD + écrans** — `DONE`. Titre DEFLECT (Orbitron), score, record
+  (localStorage, hors moteur), temps, niveau, mode de contrôle ; écran de
+  démarrage et écran de fin avec boutons modernes. Polices hébergées
+  (voir `ASSETS.md`).
+- **R9. Performance** — `DONE` (environnement headless). FPS moy. ~48-53 /
+  min ~37 sous Firefox headless en **WebGL logiciel sans GPU** — au maximum
+  de ce que cet environnement permet ; à confirmer ≈60 FPS sur machine
+  réelle. Textures pré-calculées, aucune allocation lourde par frame.
+  Bug réel trouvé et corrigé au passage : particules orbitales à NaN
+  (signature `tweens.addCounter`).
+- **R10. Raquette instantanée** — `DONE`, décision du groupe (game feel) :
+  le plafond de vitesse angulaire (`PADDLE_SPEED`) est retiré du moteur —
+  la raquette s'oriente instantanément vers la commande, raccourci angulaire
+  conservé (angle brut continu). Constante et clamps supprimés, tests
+  adaptés (26/26), `visual-check.mjs` exit 0.
 
 ### v0.2 — Boucle complète et finition
 
