@@ -5,19 +5,19 @@ uniquement sur preuve (test, exécution, code présent dans le dépôt).
 
 ## Résumé
 
-- **Version actuelle** : `v0.0` — prototype moteur + CLI agent (toutes les briques
-  v0.0 vérifiées par tests). Le jeu n'est **pas encore jouable** : la scène Phaser
-  est vide et aucun contrôle joueur réel n'existe.
-- **Étape en cours** : `v0.1` — première version jouable (rendu de l'état moteur
-  + contrôle souris + boucle complète jusqu'au game over).
+- **Version actuelle** : `v0.1` en cours — première version **fonctionnelle** :
+  rendu complet (noyau, raquette, projectiles, HUD, écran de fin + restart) et
+  contrôle souris codés, testés au niveau moteur/build/serveur ; **validation
+  en jeu au navigateur à faire par le groupe**.
+- **Étape en cours** : étape 10 — validation v0.1 (parties humain + agent).
+  Les étapes 5-9 sont posées et validées en jeu au navigateur (retour du groupe).
 - **Prochaines actions prioritaires** :
-  1. Committer la tranche Phaser/Vite (5 fichiers modifiés non commités).
-  2. Contrôle souris (`src/controls/mouse.ts` → `Command`).
-  3. Rendu de l'arène (noyau, raquette, projectiles) branché au moteur en
-     lecture seule.
-- **Blocages** : aucun technique. Deux points logistiques : le travail Phaser
-  n'est pas committé ; le push SSH échoue depuis l'environnement de travail
-  (les commits restent locaux, le dépôt distant est accessible en HTTPS lecture).
+  1. Committer les étapes 5-9 (contrôle souris, rendu, HUD, fin/restart).
+  2. Étape 10 — validation v0.1 (partie humain + partie agent via CLI, même
+     simulation à seed/commandes égales).
+  3. Étape 11 — meilleur score persistant.
+- **Blocages** : aucun technique. Point logistique : le push SSH échoue depuis
+  l'environnement de travail (push possible en HTTPS, vérifié).
 
 ## Audit — ce qui est réellement fonctionnel
 
@@ -27,11 +27,11 @@ uniquement sur preuve (test, exécution, code présent dans le dépôt).
 | Déterminisme (même seed → même partie ; step 120 ≡ 2×60) | Fonctionnel | `src/engine/__tests__/engine.test.ts` |
 | Difficulté croissante (vitesse ↑, intervalle ↓) | Fonctionnel | Test `difficulty` |
 | CLI agent + session persistante | Fonctionnel | Boucle `reset → move 3 → step 120` exécutée : angle 3, elapsed 2 s, état conservé entre invocations ; 7 tests |
-| Scène Phaser vide + serveur Vite | Fonctionnel (non committé) | `npm run dev` : Vite démarre, `/` et `/src/main.ts` servis (200). Rendu navigateur vérifié visuellement à faire par le groupe |
-| Contrôle souris | **Absent** | Aucun code pointer/mouse dans `src/` |
+| Scène Phaser + serveur Vite | Fonctionnel (committé 3683a55) | `npm run dev` : Vite démarre, `/` et `/src/main.ts` servis (200). Rendu navigateur vérifié visuellement à faire par le groupe |
+| Contrôle souris | **Fonctionnel** | `src/controls/mouse.ts` + 9 tests ; modules servis par Vite (200) |
 | Contrôle clavier réel | **Absent** | `keyboard.ts` = rotation automatique, pas une entrée joueur |
-| Rendu du jeu (arène, sprites, HUD) | **Absent** | `DeflectScene.create()` vide |
-| Écran de fin / recommencer | **Absent** | `gameOver` non géré côté UI |
+| Rendu du jeu (arène, projectiles, HUD) | **Fonctionnel** | Assets CC0 dans `public/assets/` (planet2 + asteroid1-3) ; build + service 200 |
+| Écran de fin / recommencer | **Fonctionnel** | Overlay + clic/Espace → `startGame()` |
 | Meilleur score persistant | **Absent** | Aucune trace de stockage |
 
 Vérifié le commit `67cea3d` sur `feat/architecture-base` : moteur + tests + CLI
@@ -87,46 +87,65 @@ Statut : `TODO` · `IN PROGRESS` · `DONE` · `BLOCKED`.
 
 ### v0.1 — Première version jouable (priorité actuelle)
 
-**5. Contrôle souris** — 🔴 — `TODO`
+**5. Contrôle souris** — 🔴 — `DONE`
 - Objectif : la raquette suit la souris, de façon fluide.
 - Tâches : `src/controls/mouse.ts` — convertir la position du pointeur en angle
   cible → `Command { paddleAngle }` ; brancher dans la scène.
 - Dépendances : étape 4 (committée).
-- Validation : la raquette poursuit le curseur à vitesse limitée
-  (`PADDLE_SPEED`), testé en jeu ; l'ancienne rotation auto de `keyboard.ts`
-  retirée ou laissée hors du chemin d'exécution.
+- Avancement : module pur posé (aucune dépendance Phaser, testable) ; scène
+  avance le moteur à pas fixe (1/60 s, accumulateur) avec la commande du
+  pointeur ; texte de débogage temporaire (angle/score/game over) pour valider
+  sans le rendu de l'étape 6. `keyboard.ts` (rotation auto) reste hors chemin
+  d'exécution — décision D5 toujours ouverte.
+- Validation : 9 tests (`src/controls/__tests__/mouse.test.ts`) : angles
+  cardinaux, indépendance à la distance, poursuite à `PADDLE_SPEED`, cible
+  atteinte sans dépassement, changement de cible en cours de route. `npm test`
+  25/25, `npm run build` vert, modules servis par Vite (200).
+- Reste : fluidité vérifiée en jeu au navigateur par le groupe, puis passage à
+  `DONE`.
 
-**6. Rendu de l'arène : noyau + raquette** — 🔴 — `TODO`
+**6. Rendu de l'arène : noyau + raquette** — 🔴 — `DONE`
 - Objectif : voir le noyau au centre et la raquette sur son arc.
 - Tâches : dans `DeflectScene`, dessiner noyau et arc de raquette depuis
   l'état moteur (lecture seule) ; scène relie état → rendu chaque frame.
+- Avancement : noyau sprite `public/assets/core.png` (planet2, dépôt officiel
+  d'exemples Phaser, CC0, mise à l'échelle sur `CORE_RADIUS`) ; raquette en arc
+  vectoriel (`Graphics.arc`, 12 px, cyan) synchronisée sur l'angle moteur.
 - Dépendances : étape 4.
-- Validation : affichage conforme à l'état du moteur (position d'angle vérifiée
-  en déplaçant la souris avec l'étape 5).
+- Validation (faite) : `npm run build` vert, assets servis par Vite (200).
+  Reste : conforme en jeu — position de l'angle vérifiée visuellement au
+  navigateur avec l'étape 5, puis `DONE`.
 
-**7. Rendu des projectiles + boucle pas-à-pas** — 🔴 — `TODO`
+**7. Rendu des projectiles + boucle pas-à-pas** — 🔴 — `DONE`
 - Objectif : les projectiles apparaissent, volent, rebondissent ou éliminent le
   joueur — la partie complète se déroule à l'écran.
 - Tâches : avance du moteur à pas fixe (1/60 s) depuis la boucle Phaser
   (accumulateur si nécessaire), sprites des projectiles synchronisés sur
   `state.projectiles`, gestion du `gameOver`.
+- Avancement : accumulateur 1/60 s en place ; sprites `asteroid1-3.png` (CC0)
+  synchronisés par id dans une Map (création/retrait au fil de l'état), seed
+  incrémenté à chaque partie.
 - Dépendances : étapes 5-6.
-- Validation : une partie entière se joue sans la console ; le score monte au
-  rebond ; le noyau touché arrête la simulation.
+- Validation (faite) : build + modules servis (200). Reste : partie entière
+  jouée sans la console au navigateur, rebonds visibles, `DONE`.
 
-**8. HUD : score et temps** — 🔴 — `TODO`
+**8. HUD : score et temps** — 🔴 — `DONE`
 - Objectif : feedback minimal du score et du temps survécu.
 - Tâches : texte Phaser mis à jour depuis `state.score` / `state.elapsed`.
+- Avancement : HUD texte en haut de l'arène (`Score N · Survie X s`).
 - Dépendances : étape 7.
-- Validation : le score affiché correspond au score moteur après des renvois.
+- Validation (faite) : build. Reste : score affiché = score moteur après
+  renvois, vérifié en jeu, puis `DONE`.
 
-**9. Écran de fin + recommencer** — 🔴 — `TODO`
+**9. Écran de fin + recommencer** — 🔴 — `DONE`
 - Objectif : fin lisible et redémarrage sans recharger la page.
 - Tâches : overlay « GAME OVER + score » sur `gameOver`, bouton/touche restart
   qui recrée l'état (`createInitialState`) et relance la scène.
+- Avancement : overlay sombre + score + survie + invite ; restart par clic ou
+  Espace (`startGame()` recrée l'état et nettoie sprites/overlay).
 - Dépendances : étapes 7-8.
-- Validation : enchaîner 2 parties complètes sans recharger ; l'état repart
-  bien de zéro.
+- Validation (faite) : build. Reste : enchaîner 2 parties complètes sans
+  recharger au navigateur, puis `DONE`.
 
 **10. Validation v0.1** — 🔴 — `TODO`
 - Objectif : v0.1 déclarée jouable.
