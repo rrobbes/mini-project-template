@@ -63,8 +63,8 @@ export function saveSession(session: CliSession): void {
 
 /**
  * Enregistre un déplacement : angle cible absolu sur l'arc.
- * Le mouvement effectif est appliqué par le moteur au pas suivant,
- * limité par PADDLE_SPEED — la CLI ne contourne pas le moteur.
+ * Le mouvement effectif est appliqué par le moteur au pas suivant
+ * (orientation instantanée) — la CLI ne contourne pas le moteur.
  */
 export function applyCommand(session: CliSession, cmd: Command): void {
   if (cmd.paddleAngle === undefined) return;

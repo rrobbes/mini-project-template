@@ -1,7 +1,7 @@
 // Contrôle souris : convertit la position du pointeur en commande moteur.
 // Module pur — aucune dépendance à Phaser : il reçoit un point {x, y} quelconque
 // (pointeur Phaser, événement DOM, coordonnées de test) et renvoie une Command.
-// Le moteur reste seul responsable du mouvement (limité par PADDLE_SPEED).
+// Le moteur reste seul responsable du mouvement (orientation instantanée).
 import { Command, GameState } from '../engine';
 
 /**

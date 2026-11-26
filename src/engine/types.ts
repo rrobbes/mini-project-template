@@ -48,4 +48,3 @@ export const CORE_RADIUS = 30;
 export const PADDLE_DISTANCE = 120;
 export const PADDLE_ARC = Math.PI / 3; // 60 degrés
 export const PROJECTILE_RADIUS = 8;
-export const PADDLE_SPEED = 6; // rad/s — vitesse max de déplacement de la raquette

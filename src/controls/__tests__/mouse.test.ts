@@ -1,6 +1,6 @@
 // Tests du contrôle souris : conversion pointeur → angle → commande moteur.
 import { describe, it, expect } from 'vitest';
-import { createInitialState, step, PADDLE_SPEED } from '../../engine';
+import { createInitialState, step } from '../../engine';
 import { pointerToPaddleAngle, mouseCommand } from '../mouse';
 
 const DT = 1 / 60;
@@ -53,16 +53,14 @@ describe('mouseCommand → moteur', () => {
     expect(mouseCommand(s, pointer).paddleAngle).toBeCloseTo(Math.PI, 10);
   });
 
-  it('un pas de simulation déplace la raquette vers le pointeur, limité par PADDLE_SPEED', () => {
+  it('un pas de simulation oriente instantanément la raquette vers le pointeur', () => {
     const s = state();
     const pointer = { x: s.core.pos.x - 120, y: s.core.pos.y }; // angle π
     step(s, mouseCommand(s, pointer), DT);
-    // Raquette partie de 0 : un pas = au plus PADDLE_SPEED * dt = 0.1 rad.
-    expect(s.paddle.angle).toBeCloseTo(PADDLE_SPEED * DT, 10);
-    expect(s.paddle.angle).toBeLessThan(Math.PI);
+    expect(s.paddle.angle).toBeCloseTo(Math.PI, 10);
   });
 
-  it('la raquette poursuit le pointeur sur plusieurs pas et l\'atteint sans le dépasser', () => {
+  it('la raquette reste sur le pointeur pendant toute la simulation', () => {
     const s = state();
     const pointer = { x: s.core.pos.x - 120, y: s.core.pos.y }; // angle π
     const cmd = mouseCommand(s, pointer);

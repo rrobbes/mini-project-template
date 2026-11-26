@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 import { createInitialState, step } from '../index';
 import { reflect, hitCore, hitPaddle } from '../collisions';
 import { difficulty } from '../spawner';
-import { Command, GameState, PADDLE_SPEED, PROJECTILE_RADIUS } from '../types';
+import { Command, GameState, PROJECTILE_RADIUS } from '../types';
 
 const DT = 1 / 60;
 
@@ -50,15 +50,22 @@ describe('déterminisme du moteur', () => {
 });
 
 describe('raquette', () => {
-  it('le déplacement par pas est limité par PADDLE_SPEED', () => {
+  it('le déplacement vers la cible est instantané', () => {
     const state = createInitialState(1);
-    // Cible très loin : un pas ne doit pas dépasser PADDLE_SPEED * dt.
-    step(state, { paddleAngle: Math.PI }, DT);
-    expect(state.paddle.angle).toBeCloseTo(PADDLE_SPEED * DT, 10);
-    // Puis les pas suivants avancent d'au plus PADDLE_SPEED * dt chacun.
-    const before = state.paddle.angle;
-    step(state, { paddleAngle: Math.PI }, DT);
-    expect(state.paddle.angle).toBeCloseTo(before + PADDLE_SPEED * DT, 10);
+    step(state, { paddleAngle: Math.PI / 2 }, DT);
+    expect(state.paddle.angle).toBeCloseTo(Math.PI / 2, 10);
+    // Changer de cible s'applique aussi immédiatement.
+    step(state, { paddleAngle: -0.3 }, DT);
+    expect(state.paddle.angle).toBeCloseTo(-0.3, 10);
+  });
+
+  it('le raccourci angulaire emprunte le chemin le plus court', () => {
+    const state = createInitialState(1);
+    // De 350° vers 10° : par le nord, pas par le sud.
+    state.paddle.angle = (350 * Math.PI) / 180;
+    step(state, { paddleAngle: (10 * Math.PI) / 180 }, DT);
+    // 350° + 20° = 370° = 10° modulo 2π : l'angle brut reste continu.
+    expect(state.paddle.angle).toBeCloseTo((370 * Math.PI) / 180, 10);
   });
 
   it('un renvoi de raquette vaut 1 point et renvoie le projectile', () => {

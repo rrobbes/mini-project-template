@@ -1,4 +1,4 @@
-import { GameState, Command, PADDLE_SPEED } from './types';
+import { GameState, Command } from './types';
 import { makeRng } from './rng';
 import { spawnProjectile, difficulty } from './spawner';
 import { hitPaddle, hitCore, reflect } from './collisions';
@@ -9,14 +9,15 @@ export function step(state: GameState, cmd: Command, dt: number): void {
 
   const rng = makeRng(state.seed + Math.floor(state.elapsed * 1000) + state.nextId);
 
-  // 1. Déplacer la raquette vers l'angle cible (vitesse limitée)
+  // 1. Orienter la raquette vers l'angle cible (mouvement instantané).
+  //    Le raccourci angulaire est conservé pour que l'angle brut reste
+  //    continu (rendu/traînée) et que le déterminisme soit inchangé.
   if (cmd.paddleAngle !== undefined) {
     let diff = cmd.paddleAngle - state.paddle.angle;
     // Raccourci angulaire (ex: passer de 350° à 10°)
     while (diff > Math.PI) diff -= 2 * Math.PI;
     while (diff < -Math.PI) diff += 2 * Math.PI;
-    const maxStep = PADDLE_SPEED * dt;
-    state.paddle.angle += Math.max(-maxStep, Math.min(maxStep, diff));
+    state.paddle.angle += diff;
   }
 
   // 2. Spawn de projectiles selon l'intervalle de difficulté

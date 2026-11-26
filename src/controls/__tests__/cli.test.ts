@@ -11,7 +11,7 @@ import {
   applyCommand,
   advance,
 } from '../cli';
-import { createInitialState, PADDLE_SPEED } from '../../engine';
+import { createInitialState } from '../../engine';
 
 const DT = 1 / 60;
 const SESSION = path.join(os.tmpdir(), `deflect-test-session-${process.pid}.json`);
@@ -70,17 +70,12 @@ describe('commande d\'angle cible', () => {
     expect(session.targetAngle).toBeNull();
   });
 
-  it('l\'angle cible est atteint à la vitesse PADDLE_SPEED, pas instantanément', () => {
+  it('l\'angle cible est atteint instantanément au premier pas', () => {
     const session = loadSession();
-    // Cible à π rad : hors de portée d'un seul step (PADDLE_SPEED * dt = 0.1 rad).
     applyCommand(session, { paddleAngle: Math.PI });
-    expect(session.state.paddle.angle).toBe(0);
+    expect(session.state.paddle.angle).toBe(0); // pas encore simulé
 
-    advance(session, 30); // 0,5 s → au plus 3,0 rad, π ≈ 3,1416 non atteint
-    expect(session.state.paddle.angle).toBeCloseTo(30 * PADDLE_SPEED * DT, 10);
-    expect(session.state.paddle.angle).toBeLessThan(Math.PI);
-
-    advance(session, 30); // 0,5 s de plus → cible atteinte sans la dépasser
+    advance(session, 1); // un seul pas suffit
     expect(session.state.paddle.angle).toBeCloseTo(Math.PI, 10);
   });
 
